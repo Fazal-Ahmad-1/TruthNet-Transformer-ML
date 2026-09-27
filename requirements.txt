@@ -1,4 +1,4 @@
 Flask
 transformers
-torch
 gunicorn
+torch==2.6.0

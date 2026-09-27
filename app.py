@@ -3,9 +3,9 @@ from transformers import pipeline, AutoConfig
 
 app = Flask(__name__)
 
-MODEL_NAME = "vikram71198/distilroberta-base-finetuned-fake-news-detection"
+MODEL_NAME = "ErfanMoosaviMonazzah/bert-tiny-fake-news-detection"
 
-print("Loading pretrained DistilRoBERTa model...")
+print("Loading pretrained TinyBERT model...")
 
 # Inspect the model's label configuration
 config = AutoConfig.from_pretrained(MODEL_NAME)
@@ -19,7 +19,7 @@ classifier = pipeline(
     tokenizer=MODEL_NAME
 )
 
-print("DistilRoBERTa model loaded successfully!")
+print("TinyBERT model loaded successfully!")
 
 
 @app.route("/predict", methods=["POST"])
@@ -49,7 +49,7 @@ def predict():
 
     # Temporary mapping.
     # We will verify this using the model's actual id2label configuration.
-    if label in ["LABEL_1", "fake_news", "FAKE"]:
+    if label == "LABEL_0":
         prediction = "FAKE"
     else:
         prediction = "REAL"
@@ -57,7 +57,7 @@ def predict():
     return jsonify({
         "prediction": prediction,
         "confidence": round(confidence, 2),
-        "model": "DistilRoBERTa"
+        "model": "TinyBERT"
     })
 
 
@@ -65,7 +65,7 @@ def predict():
 def health():
     return jsonify({
         "status": "UP",
-        "model": "DistilRoBERTa Fake News Detector"
+        "model": "TinyBERT Fake News Detector"
     })
 
 
