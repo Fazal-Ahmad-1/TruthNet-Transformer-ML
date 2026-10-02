@@ -21,6 +21,13 @@ classifier = pipeline(
 
 print("TinyBERT model loaded successfully!")
 
+@app.route("/health", methods=["GET"])
+def health():
+    return {
+        "status": "UP",
+        "service": "TruthNet Transformer ML"
+    }, 200
+
 
 @app.route("/predict", methods=["POST"])
 def predict():
