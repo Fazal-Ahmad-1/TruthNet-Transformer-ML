@@ -68,14 +68,6 @@ def predict():
     })
 
 
-@app.route("/health", methods=["GET"])
-def health():
-    return jsonify({
-        "status": "UP",
-        "model": "TinyBERT Fake News Detector"
-    })
-
-
 if __name__ == "__main__":
     app.run(
         host="0.0.0.0",
